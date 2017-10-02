@@ -1,0 +1,15 @@
+#Uncomment the below lines to suspend the API service temporarily
+#RewriteEngine On
+#RewriteRule .* - [R=503,L]
+
+order deny,allow
+deny from all
+allow from localhost
+allow from office-sec
+allow from office-ext
+allow from 192.168.40.116
+AuthType Basic
+AuthName "Pinghampton Console"
+AuthUserFile "/home/sites/api.example.local/htdocs/pinghampton/.htpasswd"
+Require valid-user
+
