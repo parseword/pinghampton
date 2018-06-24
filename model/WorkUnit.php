@@ -101,6 +101,12 @@ class WorkUnit {
             throw new Exception(PINGHAMPTON_CLIENT_SAVEDIR . ' does not exist, '
                 . 'and attempting to create it failed');
         }
+
+        //Don't write out an empty WorkUnit. Valid JSON would include an epoch stamp,
+        //making it at least 10 characters long, so we'll test for that.
+        if (strlen($this->json) < 10) {
+            return false;
+        }
         
         //Attempt to write the work unit's JSON to a text file
         $filename = PINGHAMPTON_CLIENT_SAVEDIR . '/' . $this->id . '.txt';
